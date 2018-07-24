@@ -1,17 +1,11 @@
 import React from "react";
+import RegForm from "../components/RegForm";
 
-const SignUp = () => {
-  return (
-    <div className="signup">
-      <form>
-        <input type="text" placeholder="Ваш ник" />
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Пароль" />
-        <input type="password" placeholder="Подтверждение пароля" />
-        <input type="submit" value="Зарегистрироваться" />
-      </form>
-    </div>
-  );
+const SignUpPage = ({ history }) => {
+  const handleSubmit = () => {
+    history.push("/");
+  };
+  return <RegForm submitWithRedirect={handleSubmit} />;
 };
 
-export default SignUp;
+export default SignUpPage;

@@ -1,4 +1,7 @@
 import {
+  REG_REQUEST,
+  REG_SUCCESS,
+  REG_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
@@ -12,10 +15,17 @@ const initialState = {
   isSubmiting: false,
   isFetching: false,
   message: "",
+  errors: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case REG_REQUEST:
+      return { isSubmiting: true };
+    case REG_SUCCESS:
+      return { isSubmiting: false, errors: [] };
+    case REG_FAILURE:
+      return { isSubmiting: false, errors: action.errors };
     case LOG_IN_REQUEST:
       return { isSubmiting: true };
     case FEATCH_USER:
