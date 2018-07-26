@@ -2,8 +2,6 @@ import {
   REG_REQUEST,
   REG_SUCCESS,
   REG_FAILURE,
-  FETCH_USER_REQUEST,
-  FETCH_USER_SUCCESS,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
@@ -19,6 +17,7 @@ export const logIn = (formData, cb) => dispatch => {
     .post("/api/v1/signin", formData)
     .then(({ data }) => {
       cookies.save("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       dispatch({ type: LOG_IN_SUCCESS, user: data.user });
       cb();
     })
@@ -42,25 +41,8 @@ export const signUp = formData => dispatch => {
     });
 };
 
-export const getAuthenticatedUser = () => dispatch => {
-  dispatch({ type: FETCH_USER_REQUEST });
-
-  const headers = {
-    Authorization: `Bearer ${cookies.load("token")}`,
-  };
-
-  axios
-    .get("/api/v1/user", { headers })
-    .then(({ data }) => {
-      dispatch({ type: FETCH_USER_SUCCESS, user: data.user });
-    })
-    .catch(err => {
-      cookies.remove("token");
-      dispatch({ type: LOG_OUT });
-    });
-};
-
 export const logOut = () => dispatch => {
   cookies.remove("token");
+  localStorage.removeItem("user");
   dispatch({ type: LOG_OUT });
 };

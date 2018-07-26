@@ -13,7 +13,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import "./index.css";
 
 import App from "./App";
-import { LOG_IN_SUCCESS } from "./constants/types";
+import { LOG_IN_SUCCESS, LOG_OUT } from "./constants/types";
 import registerServiceWorker from "./registerServiceWorker";
 
 const store = createStore(
@@ -22,8 +22,12 @@ const store = createStore(
 );
 
 const token = cookies.load("token");
-if (token) {
-  store.dispatch({ type: LOG_IN_SUCCESS });
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (token && user) {
+  store.dispatch({ type: LOG_IN_SUCCESS, user });
+} else {
+  store.dispatch({ type: LOG_OUT });
 }
 
 ReactDOM.render(

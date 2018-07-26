@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import { withRouter, Switch, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import cookies from "react-cookies";
 
 import WelcomePage from "./containers/WelcomePage";
 import LobbyPage from "./containers/LobbyPage";
 import SignUpPage from "./containers/SignUpPage";
-import { getAuthenticatedUser } from "./actions/authActions";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import LockedRoute from "./components/LockedRoute";
 
 class App extends Component {
-  componentDidMount = () => {
-    const token = cookies.load("token");
-    if (token) {
-      this.props.getAuthenticatedUser();
-    }
-  };
-
   render() {
     return (
       <div className="app">
@@ -51,6 +43,6 @@ export default withRouter(
     state => ({
       isLoggedIn: state.auth.isLoggedIn,
     }),
-    { getAuthenticatedUser },
+    null,
   )(App),
 );
