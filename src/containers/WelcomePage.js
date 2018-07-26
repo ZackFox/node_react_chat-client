@@ -1,26 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 import { logIn } from "../actions/authActions";
 import LoginForm from "../components/LoginForm";
 
-const WelcomePage = ({ logIn, message }) => {
-  const submitHandler = credentials => {
-    logIn(credentials);
+class WelcomePage extends Component {
+  state = {
+    isRedirect: false,
   };
 
-  return (
-    <div className="App">
-      <LoginForm onSubmit={submitHandler} message={message} />
-      <Link to="/signup">Регистрация</Link>
-    </div>
-  );
-};
+  handleSubmit = credentials => {
+    this.props.logIn(credentials, () => this.setState({ isRedirect: true }));
+  };
+
+  render() {
+    const { isLoggedIn, message } = this.props;
+
+    if (this.state.isRedirect) {
+      return <Redirect to="/lobby" />;
+    }
+
+    return (
+      <section className="welcome">
+        <div className="container">
+          <h1>React chat app</h1>
+          {!isLoggedIn ? (
+            <LoginForm onSubmit={this.handleSubmit} message={message} />
+          ) : (
+            <Link to="/lobby"> Перейти в чат </Link>
+          )}
+        </div>
+      </section>
+    );
+  }
+}
 
 export default connect(
   state => ({
     message: state.auth.message,
+    isLoggedIn: state.auth.isLoggedIn,
   }),
   { logIn },
 )(WelcomePage);

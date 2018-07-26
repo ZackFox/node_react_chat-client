@@ -1,20 +1,35 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { getRooms } from "../actions/chatActions";
+import { logOut } from "../actions/authActions";
+
+import Sidebar from "../components/Sidebar";
 
 class LobbyPage extends Component {
+  componentWillMount = () => {
+    this.props.getRooms();
+  };
+
   render() {
+    const { user, rooms, logOut } = this.props;
     return (
-      <div className="App">
-        <header className="App-header" />
-        <div className="flex-container">
-          <div className="content">
-            <div className="messages">messages</div>
-            <div className="post">new message</div>
+      <section className="lobby">
+        <div className="container">
+          <div className="chat-container">
+            <div className="chat-area">messages</div>
+            <Sidebar user={user} rooms={rooms} logOut={logOut} />
           </div>
-          <aside className="users">users</aside>
         </div>
-      </div>
+      </section>
     );
   }
 }
 
-export default LobbyPage;
+export default connect(
+  state => ({
+    user: state.auth.user,
+    rooms: state.chat.rooms,
+  }),
+  { getRooms, logOut },
+)(LobbyPage);

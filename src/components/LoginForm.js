@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import errors from "../constants/errors";
 
 class LoginForm extends React.Component {
@@ -42,6 +43,7 @@ class LoginForm extends React.Component {
           />
           <p>{errors[this.props.message]}</p>
           <input type="submit" value="Войти" />
+          <Link to="/signup">Регистрация</Link>
         </form>
       </div>
     );

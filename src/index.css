@@ -3,3 +3,69 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.container {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding: 0 15px;
+  height: 100%;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page {
+  flex: 1;
+  background: #d0d0d0;
+}
+
+.signin {
+  width: 40%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 5px 3px 18px -2px #2c4d36c7;
+}
+
+.lobby {
+  height: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.chat-container {
+  display: flex;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 5px 3px 18px -2px #2c4d36c7;
+}
+
+.chat-area {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.chat-aside {
+  background: #656b74;
+  color: #fff;
+  width: 250px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.user-info {
+  background: #4f51be;
+  padding: 20px 15px;
+}
+
+.footer {
+  padding: 20px 0;
+  background: #424242;
+  color: #fff;
+}
