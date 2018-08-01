@@ -1,19 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default ({ user, rooms }) => {
+import UserBlock from "./UserBlock";
+import RoomsList from "./RoomsList";
+
+const Sidebar = ({ socket, user, logOut }) => {
   return (
-    <div className="chat-aside">
-      <div className="user-info">{user && user.screenname}</div>
-
+    <React.Fragment>
+      <UserBlock user={user} logOut={logOut} />
+      <input type="text" name="room-search" placeholder="Поиск комнат" />
       <button>Создать комнату</button>
-      {rooms &&
-        rooms.map(r => {
-          return (
-            <div key={r.id}>
-              <h4>{r.name}</h4>
-            </div>
-          );
-        })}
-    </div>
+      <RoomsList socket={socket} />
+    </React.Fragment>
   );
 };
+
+export default connect(
+  state => ({
+    user: state.auth.user,
+  }),
+  null,
+)(Sidebar);

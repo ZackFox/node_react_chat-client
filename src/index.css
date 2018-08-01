@@ -20,7 +20,7 @@ body {
 
 .page {
   flex: 1;
-  background: #d0d0d0;
+  background: #54bd7a;
 }
 
 .signin {
@@ -33,35 +33,84 @@ body {
 
 .lobby {
   height: 100%;
-  padding: 20px 0;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat-container {
   display: flex;
-  height: 100%;
+  width: 85%;
+  height: 600px;
   background: #fff;
-  border-radius: 10px;
   box-shadow: 5px 3px 18px -2px #2c4d36c7;
 }
 
 .chat-area {
   flex: 1;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 
-.chat-aside {
-  background: #656b74;
+.chat-header {
+  padding: 20px;
+  color: #424242;
+  background: #d6d4da;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.sidebar-area {
+  background: #3e4665;
   color: #fff;
   width: 250px;
-  height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-.user-info {
-  background: #4f51be;
+.user-block {
+  background: #755dc1;
   padding: 20px 15px;
+}
+
+.room {
+  padding: 10px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.room:hover {
+  background: #ccc;
+  color: #000;
+}
+
+.room-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 30px;
+  border: 1px solid #000;
+}
+.room-avatar img {
+  width: 100%;
+}
+
+.room-title {
+  margin-left: 15px;
+}
+
+.rooms-list {
+  flex: 1;
+  overflow-y: scroll;
 }
 
 .footer {

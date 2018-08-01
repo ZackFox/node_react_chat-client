@@ -5,9 +5,13 @@ export const REG_FAILURE = "REG_FAILURE";
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
-
-export const LOG_OUT = "LOG_IN_FAILURE";
+export const LOG_OUT = "LOG_OUT";
 
 export const ALL_ROOMS_REQUEST = "ALL_ROOMS_REQUEST";
 export const ALL_ROOMS_SUCCESS = "ALL_ROOMS_SUCCESS";
 export const ALL_ROOMS_FAILURE = "ALL_ROOMS_FAILURE";
+
+export const SET_ACTIVE_ROOM = "SET_ACTIVE_ROOM";
+
+export const MESSAGES_REQUEST = "MESSAGES_REQUEST";
+export const MESSAGES_SUCCESS = "MESSAGES_SUCCESS";

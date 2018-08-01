@@ -22,8 +22,9 @@ export const logIn = (formData, cb) => dispatch => {
       cb();
     })
     .catch(err => {
-      const message = err.response.data.message;
-      dispatch({ type: LOG_IN_FAILURE, message });
+      cookies.remove("token");
+      localStorage.removeItem("user");
+      dispatch({ type: LOG_IN_FAILURE });
     });
 };
 

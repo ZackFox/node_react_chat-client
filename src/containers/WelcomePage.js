@@ -18,7 +18,7 @@ class WelcomePage extends Component {
     const { isLoggedIn, message } = this.props;
 
     if (this.state.isRedirect) {
-      return <Redirect to="/lobby" />;
+      return <Redirect to="/chat" />;
     }
 
     return (
@@ -28,7 +28,7 @@ class WelcomePage extends Component {
           {!isLoggedIn ? (
             <LoginForm onSubmit={this.handleSubmit} message={message} />
           ) : (
-            <Link to="/lobby"> Перейти в чат </Link>
+            <Link to="/chat"> Перейти в чат </Link>
           )}
         </div>
       </section>

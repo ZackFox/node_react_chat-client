@@ -3,11 +3,10 @@ import { withRouter, Switch, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import WelcomePage from "./containers/WelcomePage";
-import LobbyPage from "./containers/LobbyPage";
+import chatContainer from "./containers/chatContainer";
 import SignUpPage from "./containers/SignUpPage";
 
-import ProtectedRoute from "./components/ProtectedRoute";
-import LockedRoute from "./components/LockedRoute";
+import ProtectedRoute from "./hoc/ProtectedRoute";
 
 class App extends Component {
   render() {
@@ -16,15 +15,16 @@ class App extends Component {
         <main className="page">
           <Switch>
             <Route path="/" exact component={WelcomePage} />
-            <LockedRoute
+            <ProtectedRoute
               path="/signup"
               isAuth={this.props.isLoggedIn}
+              isLock={true}
               component={SignUpPage}
             />
             <ProtectedRoute
-              path="/lobby"
+              path="/chat"
               isAuth={this.props.isLoggedIn}
-              component={LobbyPage}
+              component={chatContainer}
             />
           </Switch>
         </main>
