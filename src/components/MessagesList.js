@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class MessagesList extends Component {
-  componentDidMount() {
+  // constructor() {
+  //   super();
+  //   this.messages = null;
+  // }
+
+  componentDidUpdate() {
     this.messages.scrollTop = this.messages.scrollHeight;
   }
 
@@ -17,8 +22,6 @@ class MessagesList extends Component {
 }
 
 export default connect(
-  state => ({
-    messages: state.messages.allMessages,
-  }),
+  state => ({}),
   null,
 )(MessagesList);

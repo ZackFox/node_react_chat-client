@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import NewMessage from "./NewMessage";
-import MessagesList from "./MessagesList";
+import NewMessage from "../components/NewMessage";
+import MessagesList from "../components/MessagesList";
 
 class ChatView extends Component {
   render() {
@@ -12,14 +12,18 @@ class ChatView extends Component {
             {this.props.activeRoom && this.props.activeRoom.name}
           </span>
         </header>
-        <MessagesList />
-        <NewMessage />
+        <MessagesList messages={this.props.messages} />
+        <NewMessage socket={this.props.socket} />
       </React.Fragment>
     );
   }
 }
 
 export default connect(
-  state => ({}),
+  state => ({
+    user: state.auth.user,
+    activeRoom: state.rooms.activeRoom,
+    messages: state.messages.allMessages,
+  }),
   null,
 )(ChatView);

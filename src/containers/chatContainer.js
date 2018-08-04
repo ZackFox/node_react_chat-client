@@ -3,12 +3,18 @@ import { connect } from "react-redux";
 import cookies from "react-cookies";
 import io from "socket.io-client";
 
-import Sidebar from "../components/Sidebar";
-import ChatView from "../components/ChatView";
+import Sidebar from "../containers/Sidebar";
+import ChatView from "../containers/ChatView";
 import AboutView from "../components/AboutView";
 
-import { getRooms, getMessages } from "../actions/chatActions";
 import { logOut } from "../actions/authActions";
+import { getRooms } from "../actions/roomsActions";
+import {
+  getMessages,
+  setTyping,
+  clearTyping,
+  addMessage,
+} from "../actions/messagesActions";
 
 class chatContainer extends Component {
   constructor(props) {
@@ -21,18 +27,39 @@ class chatContainer extends Component {
   }
 
   componentDidMount = () => {
+    const {
+      getRooms,
+      getMessages,
+      addMessage,
+      setTyping,
+      clearTyping,
+      logOut,
+    } = this.props;
+
     this.socket.on("success", data => {
       console.log(data.msg);
       this.setState({ isLoading: false });
-      this.props.getRooms();
+      getRooms();
     });
 
-    this.socket.on("error", data => {
-      this.props.logOut();
+    this.socket.on("error", () => {
+      logOut();
     });
 
     this.socket.on("messages:history", messages => {
-      this.props.getMessages(messages);
+      getMessages(messages);
+    });
+
+    this.socket.on("typing_bc:start", username => {
+      setTyping(username);
+    });
+
+    this.socket.on("typing_bc:stop", () => {
+      clearTyping();
+    });
+
+    this.socket.on("messages:add", message => {
+      addMessage(message);
     });
 
     this.socket.on("leave", data => {
@@ -69,5 +96,12 @@ export default connect(
   state => ({
     activeRoom: state.rooms.activeRoom,
   }),
-  { getRooms, getMessages, logOut },
+  {
+    getRooms,
+    getMessages,
+    setTyping,
+    clearTyping,
+    addMessage,
+    logOut,
+  },
 )(chatContainer);

@@ -1,16 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 
-import { setActiveRoom } from "../actions/roomsActions";
 import { api } from "../constants/api";
 
-const RoomItem = ({ socket, room, activeRoom, setActiveRoom }) => {
+const RoomItem = ({ room, activeRoom, setActiveRoom }) => {
   const handleClick = () => {
-    if (activeRoom) {
-      socket.emit("room:leave", activeRoom);
-    }
-    socket.emit("room:join", room);
-    setActiveRoom(room);
+    setActiveRoom(room, activeRoom);
   };
 
   const isActive = activeRoom && activeRoom.id === room.id ? "active" : "";
@@ -25,9 +19,4 @@ const RoomItem = ({ socket, room, activeRoom, setActiveRoom }) => {
   );
 };
 
-export default connect(
-  state => ({
-    activeRoom: state.rooms.activeRoom,
-  }),
-  { setActiveRoom },
-)(RoomItem);
+export default RoomItem;
